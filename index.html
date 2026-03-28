@@ -27,9 +27,9 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--tx);height
 .hdr{height:54px;display:flex;align-items:center;padding:0 18px;background:var(--surf);border-bottom:1px solid var(--bd);gap:12px;flex-shrink:0;z-index:200;box-shadow:0 1px 8px rgba(0,0,0,.1)}
 .logo-btn{display:flex;align-items:center;gap:6px;background:none;border:none;cursor:pointer;padding:5px 8px 5px 5px;border-radius:9px;transition:.15s}
 .logo-btn:hover{background:var(--surf2)}
-.logo-badge{background:#1d4ed8;color:#fff;font-family:'Lexend',sans-serif;font-weight:900;font-size:15px;padding:4px 9px;border-radius:7px;letter-spacing:.5px;line-height:1}
+.logo-badge{background:#1d4ed8;color:#fff;font-family:'Lexend',sans-serif;font-weight:900;font-size:12px;padding:6px 12px;border-radius:5px;letter-spacing:1.5px;line-height:1;text-transform:uppercase;box-shadow:0 2px 4px rgba(0,0,0,0.2)}
 .logo-badge .g{color:var(--green)}
-.logo-sub{font-family:'Lexend',sans-serif;font-weight:400;font-size:12px;color:var(--tx3);letter-spacing:.5px;text-transform:uppercase}
+.logo-sub{font-family:'Lexend',sans-serif;font-weight:600;font-size:11px;color:var(--tx3);letter-spacing:1px;text-transform:uppercase}
 .file-info{display:none;align-items:center;gap:8px;min-width:0;flex:1}
 .type-chip{background:var(--blue);color:#fff;font-size:10px;font-weight:800;padding:3px 9px;border-radius:20px;letter-spacing:.5px;flex-shrink:0}
 .file-nm{font-size:12px;color:var(--tx2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
@@ -55,13 +55,24 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--tx);height
 
 /* ── LAYOUT ── */
 .layout{display:flex;flex:1;height:calc(100vh - 54px);overflow:hidden}
+#ws{position:fixed;inset:0;z-index:9000;display:flex;flex-direction:column;justify-content:center;align-items:center;overflow:hidden;color:#fff;background:radial-gradient(circle at center,#1e4f94 0%,#0b1421 100%)}
 
 /* ── SIDEBAR ── */
 .side{width:250px;min-width:250px;flex-shrink:0;background:var(--surf);border-right:1px solid var(--bd);display:flex;flex-direction:column;padding:14px;gap:12px;overflow-y:auto}
-.side::-webkit-scrollbar{width:4px}
-.side::-webkit-scrollbar-thumb{background:var(--surf2);border-radius:2px}
+.side::-webkit-scrollbar{width:6px}
+.side::-webkit-scrollbar-thumb{background:var(--surf2);border-radius:3px}
+/* ── DARK SCROLLBAR ── */
+::-webkit-scrollbar{width:16px;height:12px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--surf2);border:4px solid var(--bg);border-radius:12px}
+::-webkit-scrollbar-thumb:hover{background:var(--tx3)}
+.CodeMirror-scroll{overflow-y:scroll !important}
+.CodeMirror-scroll::-webkit-scrollbar{width:12px}
+.CodeMirror-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.2);border-radius:12px}
+[data-theme="light"] .CodeMirror-scroll::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.2)}
 .sec{font-size:10px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;color:var(--tx3)}
-.card{background:var(--bg);border:1px solid var(--bd);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:12px}
+.card{background:var(--bg);border:1px solid var(--bd);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:12px;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(0,0,0,0.2)}
 .row{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .lbl{font-size:12px;font-weight:700;color:var(--tx2)}
 .val{font-size:11px;font-weight:700;color:var(--green);min-width:32px;text-align:right}
@@ -79,25 +90,31 @@ select:focus{outline:2px solid var(--blue);border-color:transparent}
 /* ── CONTEXT BOX ── */
 .ctx-box{background:var(--bg);border:1px solid var(--bd);border-radius:10px;padding:11px;flex:1;min-height:90px;display:flex;flex-direction:column;gap:10px;overflow-y:auto}
 .ctx-lbl{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--tx3)}
-.ctx-id{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--green);user-select:text;word-break:break-all}
+.ctx-id{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:800;color:var(--blue);user-select:text;word-break:break-all}
 .ctx-src{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--tx2);white-space:pre-wrap;word-break:break-word;line-height:1.5;user-select:text}
 
 /* ── EDITOR ── */
 .edit-area{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
-.search-bar{display:none;align-items:center;gap:8px;padding:8px 14px;background:var(--surf);border-bottom:1px solid var(--bd);flex-shrink:0}
+.search-bar{display:none;align-items:center;gap:10px;padding:10px 16px;background:var(--surf);border-bottom:1px solid var(--bd);flex-shrink:0;animation:slideDown .2s ease-out}
+@keyframes slideDown{from{transform:translateY(-10px);opacity:0}to{transform:translateY(0);opacity:1}}
 .search-bar.on{display:flex}
 .s-inp{flex:1;padding:6px 11px;border:1px solid var(--bd);border-radius:7px;background:var(--bg);color:var(--tx);font-family:'Nunito',sans-serif;font-size:13px;outline:none;min-width:0}
 .s-inp:focus{border-color:var(--blue);box-shadow:0 0 0 2px rgba(74,158,255,.2)}
 .s-cnt{font-size:11px;color:var(--tx3);white-space:nowrap;min-width:70px}
 #ew{flex:1;overflow:hidden;display:none;position:relative}
 #ew.on{display:flex;flex-direction:column}
-.ed-overlay{display:none;position:absolute;inset:0;z-index:100;background:rgba(17,24,39,.85);justify-content:center;align-items:center;flex-direction:column;gap:14px;backdrop-filter:blur(4px)}
+.ed-overlay{display:none;position:absolute;inset:0;z-index:200;background:rgba(0,0,0,0.92);justify-content:center;align-items:center;flex-direction:column;gap:20px;backdrop-filter:blur(22px)}
 .ed-overlay.show{display:flex}
-.spinner{width:42px;height:42px;border:4px solid rgba(68,214,44,.2);border-top-color:var(--green);border-radius:50%;animation:spin .8s linear infinite}
-.ov-txt{font-size:13px;font-weight:700;color:#fff;letter-spacing:.5px}
-[data-theme="light"] .ed-overlay{background:rgba(240,244,248,.88)}
-[data-theme="light"] .ov-txt{color:var(--tx)}
+.ov-txt{font-size:16px;font-weight:900;color:var(--blue);letter-spacing:4px;text-transform:uppercase;text-shadow:0 0 15px rgba(74,158,255,0.4)}
+[data-theme="light"] .ed-overlay{background:rgba(255,255,255,0.96);backdrop-filter:blur(15px)}
+[data-theme="light"] .ov-txt{color:#1d4ed8;text-shadow:none}
+/* Slim Bar for Editor */
+.ed-ld-bar{width:280px;height:8px;background:rgba(255,255,255,0.1);border-radius:10px;overflow:hidden;border:1.5px solid rgba(255,255,255,0.15)}
+[data-theme="light"] .ed-ld-bar{background:rgba(29,78,216,0.05);border-color:rgba(29,78,216,0.1)}
+.ed-ld-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--green),#a8ff78,var(--green));background-size:200% 100%;animation:shimmer 2s linear infinite;transition:width .2s linear;box-shadow:0 0 12px var(--green)}
+[data-theme="light"] .ed-ld-fill{background:linear-gradient(90deg,#1d4ed8,#60a5fa,#1d4ed8);box-shadow:0 0 10px rgba(29,78,216,0.4)}
 @keyframes spin{to{transform:rotate(360deg)}}
+@keyframes floatDeco{from{transform:translateY(0) rotate(0)}to{transform:translateY(-18px) rotate(8deg)}}
 
 /* ── CODEMIRROR — DARK ── */
 .CodeMirror{flex:1;height:100%!important;font-family:'JetBrains Mono',monospace;font-size:14px;line-height:var(--lh);background:#1e1e2e!important;color:#cdd6f4!important}
@@ -124,47 +141,54 @@ select:focus{outline:2px solid var(--blue);border-color:transparent}
 .cm-square{color:#6ee7b7!important;font-weight:700}
 /* Light mode highlight — darker for contrast */
 [data-theme="light"] .cm-nl{color:#dc2626!important;background:rgba(220,38,38,.1)}
-[data-theme="light"] .cm-sv{color:#92400e!important;background:rgba(146,64,14,.08);border-radius:2px;padding:0 2px}
+[data-theme="light"] .cm-sv{color:#92400e!important}
 [data-theme="light"] .cm-angle{color:#7c3aed!important}
 [data-theme="light"] .cm-round{color:#1d4ed8!important}
 [data-theme="light"] .cm-square{color:#065f46!important}
 /* Text selection */
 .CodeMirror-selectedtext{background:rgba(74,158,255,.35)!important}
 [data-theme="light"] .CodeMirror-selectedtext{background:rgba(29,78,216,.25)!important}
-/* Search highlight */
-.cm-searching{background:rgba(251,191,36,.45)!important;outline:2px solid rgba(251,191,36,.8)!important;border-radius:2px}
-[data-theme="light"] .cm-searching{background:rgba(234,88,12,.2)!important;outline:2px solid rgba(234,88,12,.7)!important}
+/* Search highlight — VERY CLEAR */
+.cm-searching{background:rgba(255, 230, 0, 0.6) !important; outline:3px solid #ffcc00 !important; border-radius:3px; box-shadow: 0 0 20px rgba(255, 204, 0, 0.4); z-index: 10}
+[data-theme="light"] .cm-searching{background:rgba(255, 230, 0, 0.4) !important; outline:3px solid #eab308 !important}
 
-/* ── WELCOME ── */
-#ws{position:fixed;inset:0;z-index:9000;display:flex;flex-direction:column;justify-content:center;align-items:center;overflow:hidden;color:#fff;background:radial-gradient(circle at 40% 45%,#1e4f94 0%,#0b1421 70%)}
-[data-theme="light"] #ws{background:radial-gradient(circle at 40% 45%,#2563eb 0%,#1e3a8a 55%,#064e3b 100%)}
+/* ── WELCOME (BACKUP STYLE) ── */
+#ws{position:fixed;inset:0;z-index:9000;display:flex;flex-direction:column;justify-content:center;align-items:center;overflow:hidden;color:#fff;background:radial-gradient(circle at center,#1e4f94 0%,#0b1421 100%)}
+[data-theme="light"] #ws{background:radial-gradient(circle at center,#ffffff 0%,#f5faff 100%)}
+[data-theme="light"] #ws .wc-title{color:#1d4ed8;text-shadow:3px 3px 0 rgba(29,78,216,0.05);animation:breatheLight 4s ease-in-out infinite}
+[data-theme="light"] #ws .wc-sub{color:#1e40af;font-weight:900}
+[data-theme="light"] #ws .ld-txt, [data-theme="light"] #ws .ld-bar{border-color:rgba(29,78,216,0.12);color:#1e40af}
+[data-theme="light"] #ws .ld-bar{background:rgba(29,78,216,0.03)}
+[data-theme="light"] #ws .ld-fill{background:linear-gradient(90deg,#1d4ed8,#3b82f6,#1d4ed8)}
+[data-theme="light"] #ws .cbtn{background:rgba(255,255,255,0.8);border-color:rgba(29,78,216,0.12);color:#1d4ed8;box-shadow:0 2px 8px rgba(0,0,0,0.05)}
+[data-theme="light"] .wb-deco{opacity:0.35;color:#1d4ed8;filter:drop-shadow(0 0 5px rgba(29,78,216,0.1))}
+[data-theme="light"] #ws .wc-tip{color:#1e40af;font-weight:800;text-shadow:none}
+@keyframes breatheLight{0%,100%{transform:scale(1);opacity:0.95}50%{transform:scale(1.02);opacity:1}}
 
-.wb-deco{position:absolute;font-size:42px;opacity:.07;pointer-events:none;user-select:none;animation:floatDeco 6s ease-in-out infinite alternate}
-.wb-deco.i1{top:8%;left:5%;animation-delay:0s}
-.wb-deco.i2{top:12%;right:8%;animation-delay:1s}
-.wb-deco.i3{bottom:12%;left:6%;animation-delay:2s}
-.wb-deco.i4{bottom:14%;right:6%;animation-delay:3s}
-.wb-deco.i5{top:48%;left:2%;animation-delay:4s}
-.wb-deco.i6{top:44%;right:2%;animation-delay:5s}
+.wb-deco{position:absolute;font-size:42px;opacity:0.08;pointer-events:none;user-select:none;animation:floatIcon 6s ease-in-out infinite alternate}
+@keyframes floatIcon { from { transform: translateY(0) rotate(0); } to { transform: translateY(-20px) rotate(10deg); } }
+.wb-deco.i1{top:12%;left:8%;animation-delay:0s}
+.wb-deco.i2{top:18%;right:12%;animation-delay:1s}
+.wb-deco.i3{bottom:15%;left:10%;animation-delay:2s}
+.wb-deco.i4{bottom:20%;right:8%;animation-delay:3s}
+.wb-deco.i5{top:45%;left:4%;animation-delay:4s}
+.wb-deco.i6{top:42%;right:4%;animation-delay:5s}
 
-/* Plumbob */
-.pb-cnt{margin-bottom:26px;filter:drop-shadow(0 0 30px rgba(68,214,44,.8))}
-.pb-gem{width:88px;height:176px;background:linear-gradient(135deg,#b8ff8a 0%,#44d62c 50%,#2d921d 100%);clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);animation:pbMaster 10s ease-in-out infinite;position:relative}
-.pb-gem::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.6) 0%,transparent 50%,rgba(0,0,0,.15) 100%);clip-path:inherit}
+/* Plumbob Premium */
+.pb-cnt{position:relative;margin-bottom:50px;filter:drop-shadow(0 0 25px rgba(68, 214, 44, 0.6));perspective:1000px}
+.pb-gem{width:80px;height:160px;background:linear-gradient(135deg,#a8ff78 0%,#44d62c 50%,#2d921d 100%);clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);animation:pbMaster 10s ease-in-out infinite;position:relative;transform-style:preserve-3d}
+.pb-gem::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.6) 0%,transparent 50%,rgba(0,0,0,.2) 100%);clip-path:inherit}
 
-/* SUL SUL text effect */
-.wc-title{font-family:'Lexend',sans-serif;font-weight:900;font-size:clamp(60px,9vw,96px);margin-bottom:10px;line-height:1;
-  background:linear-gradient(90deg,#fff 0%,#a8ff78 35%,#44d62c 55%,#fff 100%);
-  background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  animation:shimmer 3s linear infinite,breathe 4s ease-in-out infinite}
-.wc-sub{font-family:'Lexend',sans-serif;font-weight:300;font-size:13px;letter-spacing:7px;text-transform:uppercase;opacity:.5;margin-bottom:18px;-webkit-text-fill-color:#fff;background:none}
-.wc-tip{font-size:15px;opacity:.8;margin-bottom:32px;min-height:22px;color:#a8ff78;font-weight:600;transition:opacity .4s;text-align:center;max-width:460px;-webkit-text-fill-color:#a8ff78}
+/* Interactive SUL SUL */
+.wc-title{font-family:'Lexend',sans-serif;font-weight:900;font-size:82px;margin-bottom:12px;line-height:1;text-shadow:4px 4px 0 rgba(0,0,0,0.4);color:#fff;animation:breathe 4s ease-in-out infinite}
+.wc-sub{font-family:'Lexend',sans-serif;font-weight:600;font-size:16px;letter-spacing:8px;text-transform:uppercase;opacity:.7;margin-bottom:20px;color:#fff}
+.wc-tip{font-size:18px;opacity:.9;margin-bottom:40px;min-height:26px;color:#a8ff78;font-weight:600;font-style:italic;transition:opacity .4s;text-align:center;max-width:550px}
 
 /* Welcome loading bar */
-.ld-wrap{width:380px;display:flex;flex-direction:column;align-items:center;gap:10px;margin:0 auto 30px}
-.ld-bar{width:100%;height:13px;background:rgba(0,0,0,.4);border-radius:10px;border:2px solid rgba(255,255,255,.2);overflow:hidden}
-.ld-fill{height:100%;background:linear-gradient(90deg,#44d62c,#a8ff78);border-radius:10px;box-shadow:0 0 18px rgba(68,214,44,.6);transition:width .3s linear;width:0%}
-.ld-txt{font-size:10px;font-weight:900;letter-spacing:2px;text-transform:uppercase;opacity:.7}
+.ld-wrap{width:400px;display:flex;flex-direction:column;align-items:center;gap:15px;margin:0 auto 50px;position:relative}
+.ld-bar{width:100%;height:14px;background:rgba(0,0,0,.5);border-radius:12px;border:3px solid rgba(255,255,255,0.25);overflow:hidden;box-shadow: 0 4px 10px rgba(0,0,0,0.3)}
+.ld-fill{height:100%;background:linear-gradient(90deg,#44d62c,#a8ff78,#44d62c);background-size:200% 100%;border-radius:12px;box-shadow:0 0 25px rgba(68,214,44,.7);transition:width .3s linear;width:0%;animation:shimmer 2s linear infinite}
+.ld-txt{font-size:11px;font-weight:900;letter-spacing:2.5px;text-transform:uppercase;opacity:.8;text-shadow:0 2px 4px rgba(0,0,0,.5)}
 
 .wb-corner{position:absolute;top:22px;right:24px;display:flex;gap:10px;z-index:10}
 .cbtn{width:46px;height:46px;border-radius:50%;border:1.5px solid rgba(255,255,255,.18);background:rgba(0,0,0,.3);backdrop-filter:blur(8px);color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
@@ -194,12 +218,13 @@ select:focus{outline:2px solid var(--blue);border-color:transparent}
 code{background:var(--bg);border:1px solid var(--bd);border-radius:4px;padding:1px 5px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--tx2)}
 
 /* ── ANIMATIONS ── */
-@keyframes floatDeco{from{transform:translateY(0) rotate(0)}to{transform:translateY(-18px) rotate(8deg)}}
-@keyframes pbMaster{0%,100%{transform:translateY(0) rotateY(0deg)}50%{transform:translateY(-28px) rotateY(180deg)}}
+@keyframes pbMaster{0%,100%{transform:translateY(0) rotateY(0deg)}50%{transform:translateY(-32px) rotateY(180deg)}}
 @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
 @keyframes shimmer{to{background-position:200% center}}
 @keyframes dlgIn{from{transform:scale(.92);opacity:0}to{transform:scale(1);opacity:1}}
-@keyframes pulse{0%,100%{box-shadow:0 4px 0 var(--green-d),0 0 0 0 rgba(68,214,44,.45)}65%{box-shadow:0 4px 0 var(--green-d),0 0 0 14px rgba(68,214,44,0)}}
+@keyframes pulse{0%,100%{box-shadow:0 10px 0 var(--green-d),0 0 0 0 rgba(68,214,44,.5)}70%{box-shadow:0 10px 0 var(--green-d),0 0 0 20px rgba(68,214,44,0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes floatIcon{from{transform:translateY(0) rotate(0)}to{transform:translateY(-20px) rotate(10deg)}}
 </style>
 </head>
 <body>
@@ -207,7 +232,7 @@ code{background:var(--bg);border:1px solid var(--bd);border-radius:4px;padding:1
 <!-- ── HEADER ── -->
 <header class="hdr">
   <button class="logo-btn" onclick="goHome()">
-    <span class="logo-badge">TS<span class="g">4</span></span>
+    <span class="logo-badge">THE SIMS <span class="g">4</span></span>
   </button>
   <span class="logo-sub">Translation Tool</span>
   <div class="file-info" id="fci">
@@ -275,8 +300,8 @@ code{background:var(--bg);border:1px solid var(--bd);border-radius:4px;padding:1
     <div id="ew">
       <textarea id="editor"></textarea>
       <div class="ed-overlay" id="ed-ov">
-        <div class="spinner"></div>
-        <p class="ov-txt" id="ed-ov-txt">Đang tải file...</p>
+        <p class="ov-txt" id="ed-ov-txt">Reticulating Splines...</p>
+        <div class="ed-ld-bar"><div class="ed-ld-fill" id="ed-ldf"></div></div>
       </div>
     </div>
   </div>
@@ -291,7 +316,7 @@ code{background:var(--bg);border:1px solid var(--bd);border-radius:4px;padding:1
   <div class="pb-cnt"><div class="pb-gem"></div></div>
 
   <div class="wc">
-    <p class="wc-sub">The Sims 4</p>
+    <p class="wc-sub">Phiên bản 1.0</p>
     <h1 class="wc-title">SUL SUL!</h1>
     <p class="wc-tip" id="wtip">Chào mừng đến với TS4 Translation Tool!</p>
 
@@ -300,7 +325,7 @@ code{background:var(--bg);border:1px solid var(--bd);border-radius:4px;padding:1
       <p class="ld-txt" id="ldt">Đang tải...</p>
     </div>
 
-    <button class="btn btn-grn btn-lg pulse" style="font-family:'Lexend';font-weight:800;letter-spacing:3px;border-radius:50px;box-shadow:0 6px 0 var(--green-d),0 10px 30px rgba(0,0,0,.4)" onclick="document.getElementById('fi').click()">🚀 BẮT ĐẦU</button>
+    <button class="btn btn-grn btn-lg pulse" style="font-family:'Lexend';font-weight:900;letter-spacing:4px;border-radius:60px;padding:20px 52px;font-size:20px;box-shadow:0 8px 0 var(--green-d),0 12px 40px rgba(0,0,0,.5)" onclick="document.getElementById('fi').click()">🚀 BẮT ĐẦU</button>
   </div>
 
   <div class="wb-corner">
@@ -372,59 +397,55 @@ function simsConfirm(msg,cb){
   document.getElementById('cfm').classList.add('on');
 }
 
-/* ── ABOUT ── */
+/* ── ABOUT & GUIDE ── */
 function buildAbout(){
   document.getElementById('ab').innerHTML=`
   <div class="pane on">
-    <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:14px;gap:10px">
-      <div><b style="font-size:15px;color:var(--blue)">Sul Sul! 👋</b><br><span style="color:var(--tx2)">Công cụ dịch Mod Sims 4 chuyên nghiệp cho cộng đồng Việt.</span></div>
-      <span style="background:var(--blue);color:#fff;font-size:10px;font-weight:800;padding:3px 9px;border-radius:10px;white-space:nowrap">V1.0</span>
+    <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:18px;gap:12px">
+      <div><b style="font-size:22px;color:var(--blue)">SUL SUL! 👋</b><br></div>
     </div>
-    🌐 <b>Liên hệ:</b><br>
-    • GitHub: <a href="https://github.com/JustaTama" target="_blank" style="color:var(--green);font-weight:700;text-decoration:none">@JustaTama</a><br>
-    • Web: <a href="https://guns.lol/mtama1204" target="_blank" style="color:var(--green);font-weight:700;text-decoration:none">mtama1204</a>
+    <p style="margin-bottom:12px">The Sims 4 Translation Tool</p> 
+    🌐 <b>Liên Hệ:</b><br>
+    • GitHub: <a href="https://github.com/JustaTama" target="_blank" style="color:var(--green);font-weight:800;text-decoration:none">@JustaTama</a><br>
+    • LinkBio: <a href="https://guns.lol/mtama1204" target="_blank" style="color:var(--green);font-weight:800;text-decoration:none">guns.lol/mtama1204</a>
   </div>
   <div class="pane">
-    <b style="color:var(--green)">Quy trình 3 bước:</b><br><br>
-    <b style="color:var(--blue)">① Extract</b> — Dùng
+    <b style="color:var(--green);font-size:14px">📖 HƯỚNG DẪN SỬ DỤNG</b><br><br>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div><b style="color:var(--blue)">1. Trích xuất:</b> Dùng
     <a href="https://github.com/voky1/sims4-translator" target="_blank" style="color:var(--blue)">TS4 Translator</a> hoặc
-    <a href="https://deaderpool-mccc.com/dpstbleditor.html" target="_blank" style="color:var(--blue)">STBL Editor</a>
-    để xuất .package → .xml/.json.<br><br>
-    <b style="color:var(--blue)">② Dịch</b> — Mỗi dòng = 1 chuỗi. Giữ nguyên <code>{0}</code> <code>{1}</code> <code>{M0.he}</code> khi dịch.<br><br>
-    <b style="color:var(--blue)">③ Repack</b> — Nhấn Export → dùng tool bước ① đóng gói lại.<br><br>
-    <b style="color:var(--green)">Màu highlight trong Editor:</b>
+    <a href="https://deaderpool-mccc.com/dpstbleditor.html" target="_blank" style="color:var(--blue)">STBL Editor</a> để xuất file <code>.package</code> sang file <code>.xml</code> hoặc <code>.json</code>.</div>
+      <div><b style="color:var(--blue)">2. Nạp dữ liệu:</b> Ấn <code>🚀 BẮT ĐẦU</code> ở màn hình WELCOME để upload file vừa xuất vào Editor. Hệ thống sẽ <b>khóa dòng 1:1</b> để bảo vệ file.</div>
+      <div><b style="color:var(--blue)">3. Dịch thuật:</b> Dịch từng dòng. Giữ nguyên các biến <code>{variable}</code> khi dịch</div>
+      <div><b style="color:var(--blue)">4. Xuất bản:</b> Nhấn Export và đóng gói lại vào file <code>.package</code> bằng Tool ở bước 1</div>
+    </div>
+    <br><b style="color:var(--green)">Màu highlight trong Editor:</b>
     <div style="display:grid;grid-template-columns:auto 1fr;gap:5px 12px;margin-top:8px;font-size:12px;align-items:center">
-      <code style="color:#ffd700;border-color:#ffd70055">{0} {var}</code><span>Biến nội suy Sims 4 — giữ nguyên!</span>
-      <code style="color:#c084fc;border-color:#c084fc55">&lt;tag&gt;</code><span>Thẻ XML / dấu ngoặc nhọn</span>
-      <code style="color:#60a5fa;border-color:#60a5fa55">(text)</code><span>Dấu ngoặc tròn</span>
-      <code style="color:#34d399;border-color:#34d39955">[text]</code><span>Dấu ngoặc vuông</span>
-      <code style="color:#ff5569;border-color:#ff556955">↵</code><span>Ký tự xuống dòng — copy được</span>
-    </div><br>
-    <b style="color:var(--green)">Phím tắt:</b>
-    <div style="display:grid;grid-template-columns:auto 1fr;gap:5px 14px;margin-top:8px;font-size:12px">
-      <code>Ctrl+F</code><span>Mở / đóng tìm kiếm</span>
-      <code>F3</code><span>Tìm tiếp theo</span>
-      <code>Shift+F3</code><span>Tìm trước đó</span>
-      <code>Ctrl+S</code><span>Xuất file</span>
-      <code>Alt+D</code><span>Làm rỗng dòng</span>
-      <code>Alt+R</code><span>Khôi phục dòng gốc</span>
-      <code>Enter</code><span>Chèn ký tự xuống dòng ↵</span>
+      <code style="color:#ffd700;border-color:#ffd70055">{variable}</code><span>Biến của game — không chỉnh sửa.</span>
+      <code style="color:#d8b4fe;border-color:#d8b4fe55">&lt;tag&gt;</code><span>Thẻ XML / dấu ngoặc nhọn</span>
+      <code style="color:#93c5fd;border-color:#93c5fd55">(text)</code><span>Dấu ngoặc tròn</span>
+      <code style="color:#6ee7b7;border-color:#6ee7b755">[text]</code><span>Dấu ngoặc vuông</span>
+      <code style="color:#ff5569;border-color:#ff556955">↵</code><span>Ký tự xuống dòng — giữ nguyên!</span>
+    </div>
+    <br><b style="color:var(--green)">⚡ PHÍM TẮT:</b>
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin-top:10px;font-size:12px;background:var(--bg);padding:10px;border-radius:10px;border:1px solid var(--bd)">
+      <code>Ctrl + F</code><span>Mở / đóng tìm kiếm (Auto-focus)</span>
+      <code>F3 hoặc Enter</code><span>Tìm tiếp theo</span>
+      <code>Shift + F3</code><span>Tìm trước đó</span>
+      <code>Enter hoặc Shift + Enter</code><span>Chèn ký tự xuống dòng ↵</span>
+      <code>Alt + R</code><span>Khôi phục nội dung gốc của dòng</span>
+      <code>Ctrl + S</code><span>Xuất file nhanh</span>
     </div>
   </div>
   <div class="pane">
-    <div style="border-left:3px solid var(--blue);padding-left:14px">
-      <b style="font-size:15px;color:var(--blue)">V1.0 — Chính thức ra mắt</b><br>
-      <span style="font-size:11px;color:var(--tx3)">26 tháng 3, 2026</span><br><br>
-      🟢 <b>Welcome screen:</b> Plumbob 3D, SUL SUL! shimmer effect, loading bar.<br>
-      🔵 <b>Đa định dạng:</b> TSD .xml, DEST .xml, TS4 Translator .json.<br>
-      🟡 <b>Custom highlight:</b> <code>{var}</code> <code>&lt;tag&gt;</code> <code>()</code> <code>[]</code> và <code style="color:#ff5569">↵</code> màu đỏ.<br>
-      🟠 <b>Editor Spreadsheet:</b> Khóa số dòng — không xóa/thêm ngoài ý muốn.<br>
-      🔴 <b>Chi tiết dòng:</b> ID + Text gốc realtime, khôi phục 1 nhấn.<br>
-      ⚪ <b>Tìm kiếm:</b> Find Next/Prev, highlight kết quả rõ ràng.<br>
-      ✅ <b>DEST Export:</b> Tự động encode <code>&amp;quot;</code> đúng chuẩn XML.<br>
-      ✅ <b>Light/Dark Mode:</b> Cả Welcome và Editor đều hỗ trợ.<br><br>
-      <span style="color:var(--green);font-weight:800">⚡ HAPPY MODDING — SUL SUL!</span>
-    </div>
+    <div style="border-left:6px solid var(--blue);padding-left:20px">
+      <b style="font-size:18px;color:var(--blue)">V1.0 - Official Release</b><br>
+      <span style="font-size:12px;color:var(--tx3);letter-spacing:1px">LAST UPDATE: 28/3/2026</span><br><br>
+      ✅ Welcome screen: Plumbob 3D, SUL SUL! shimmer effect, loading bar.(Light/Dark).<br>
+      ✅ Hỗ trợ nhiều loại file: .XML (DEST/TSD) và .JSON<br>
+      ✅ Thanh tiến trình "Reticulating Splines" chuyên nghiệp.<br>
+      ✅ Hệ thống "Copy/Paste" lọc newline tự động.<br><br>
+      <span style="color:var(--green);font-weight:900;letter-spacing:2px">READY</span>
   </div>`;
 }
 function showAbout(){
@@ -451,7 +472,7 @@ function toggleTheme(){
 /* ── HOME ── */
 function goHome(){
   if(!mode) return;
-  simsConfirm('Quay về trang chủ? Nội dung chưa lưu sẽ mất!',ok=>{
+  simsConfirm('Quay về trang chủ? Mọi thay đổi chưa lưu sẽ tan biến vào hư vô !?',ok=>{
     if(!ok) return;
     document.getElementById('ws').style.display='flex';
     document.getElementById('ew').classList.remove('on');
@@ -462,24 +483,42 @@ function goHome(){
   });
 }
 
-/* ── TIPS ── */
-const TIPS=['Đang Reticulating Splines...','Giữ nguyên {0},{1},{M0.he} khi dịch!','Ctrl+S để xuất file.','Alt+R khôi phục bản gốc nếu xóa nhầm.','Đang kiểm tra tủ lạnh có còn Cheese không...','Mỗi dòng = 1 entry trong file gốc.','Lưu thường xuyên bằng Ctrl+S nhé!','Highlight màu vàng = biến Sims, ĐỪNG XÓA!','Đảm bảo không ai lấy mất cầu thang hồ bơi...'];
+/* ── WELCOME TIPS ── */
+const TIPS=[
+  'WELCOME...',
+  'Đang Reticulating Splines... Một nhiệm vụ cao cả!',
+  'Giữ nguyên {variable} nếu không muốn BUG!',
+  'Đảm bảo không ai lấy mất cầu thang hồ bơi...',
+  'Đang kiểm tra tủ lạnh có còn Cheese không...',
+  'Dịch thuật xong nhớ cho Sim đi ngủ nhé, thức đêm hại sức khỏe Sim lắm.'
+];
 let ti=0;
-setInterval(()=>{ti=(ti+1)%TIPS.length;const e=document.getElementById('wtip');e.style.opacity='0';setTimeout(()=>{e.textContent=TIPS[ti];e.style.opacity='.8'},400)},6000);
+setInterval(()=>{
+  ti=(ti+1)%TIPS.length;
+  const e=document.getElementById('wtip');
+  e.style.opacity='0';
+  setTimeout(()=>{
+    e.textContent=TIPS[ti];
+    e.style.opacity='1';
+  },400);
+},5000);
 
 /* ── LOADING BAR ── */
 function showLoader(cb){
   const wrap=document.getElementById('ld-wrap'),fill=document.getElementById('ldf'),txt=document.getElementById('ldt');
-  const msgs=['Đang đọc file...','Phân tích cấu trúc...','Nạp vào editor...','Hoàn tất!'];
+  const msgs=['Đang đọc file...','Phân tích cấu trúc...','Nạp dữ liệu vào Editor...','Hoàn tất!'];
   wrap.style.display='flex';fill.style.width='0%';
   let p=0,mi=0;
   const iv=setInterval(()=>{
-    p+=Math.random()*20+10;
+    p+=Math.random()*5+5;
     if(p>100) p=100;
     fill.style.width=p+'%';
-    txt.textContent=msgs[Math.min(mi++,msgs.length-1)];
-    if(p>=100){clearInterval(iv);setTimeout(()=>{wrap.style.display='none';cb()},250)}
-  },180);
+    if(p<30) txt.textContent='Reticulating Splines...';
+    else if(p<60) txt.textContent='Phân tích DNA của Sim...';
+    else if(p<90) txt.textContent='Nạp dữ liệu vào vũ trụ Sims...';
+    else txt.textContent='Hoàn tất! Sul Sul!';
+    if(p>=100){clearInterval(iv);setTimeout(()=>{wrap.style.display='none';cb()},350)}
+  },100);
 }
 
 /* ── CODEMIRROR OVERLAY ── */
@@ -504,12 +543,13 @@ const editor=CodeMirror.fromTextArea(document.getElementById('editor'),{
     'Ctrl-F':()=>toggleSearch(true),
     'Alt-D':()=>C('clr'),
     'Alt-R':()=>C('rst'),
-    'Enter':cm=>{cm.replaceSelection(NL)}
+    'Enter':cm=>{cm.replaceSelection(NL)},
+    'Shift-Enter':cm=>{cm.replaceSelection(NL)}
   }
 });
 editor.addOverlay(ov);
 
-/* Line-lock */
+/* Robust 1:1 Line Locking */
 editor.on('beforeChange',(cm,ch)=>{
   if(ch.origin==='setValue') return;
   const rm=ch.to.line-ch.from.line,ad=ch.text.length-1;
@@ -518,13 +558,21 @@ editor.on('beforeChange',(cm,ch)=>{
     ch.update(ch.from,ch.to,t);
     if(ch.origin==='+delete'||ch.origin==='cut') setTimeout(()=>cm.setCursor(ch.from),0);
   } else if(ad>rm){
+    // Sanitize paste: Strip trailing newline from translation tools
+    if(ch.origin==='paste' && ch.text.length>1 && ch.text[ch.text.length-1]===''){ ch.text.pop(); ch.update(ch.from,ch.to,ch.text); return; }
     const tg=ch.to.line+(ad-rm),la=cm.lastLine();
     if(tg>la) ch.update(ch.from,{line:la,ch:cm.getLine(la).length},ch.text.slice(0,la-ch.from.line+1));
     else ch.update(ch.from,{line:tg,ch:cm.getLine(tg).length},ch.text);
   }
+  // Sticky cursor for paste: stay at the end of the range
+  if(ch.origin==='paste'){
+    const f=ch.from.line, t=ch.text;
+    const fl=f+(t.length-1), fc=t[t.length-1].length;
+    setTimeout(()=>{ cm.setSelection({line:fl,ch:fc},{line:fl,ch:fc}); cm.scrollIntoView({line:fl,ch:fc},50); },0);
+  }
 });
 
-editor.on('cursorActivity',()=>{if(ids.length){const l=editor.getCursor().line;if(l<ids.length) setCtx(l)}});
+editor.on('cursorActivity',()=>{if(ids.length){const l=editor.getCursor('from').line;if(l<ids.length) setCtx(l)}});
 
 function setCtx(l){
   const ci=document.getElementById('cid'),cs=document.getElementById('csrc'),br=document.getElementById('btn-rst');
@@ -540,28 +588,31 @@ function setFont(f){editor.getWrapperElement().style.fontFamily=f;editor.refresh
 function setSize(v){editor.getWrapperElement().style.fontSize=v+'px';document.getElementById('sv').textContent=v+'px';editor.refresh()}
 function setLH(v){document.documentElement.style.setProperty('--lh',v);document.getElementById('lhv').textContent=v;editor.refresh()}
 
-/* ── SEARCH ── */
+/* ── SEARCH SYSTEM ── */
 let sOpen=false;
 function toggleSearch(force){
   sOpen=force===true?true:!sOpen;
-  document.getElementById('sb').classList.toggle('on',sOpen);
-  if(sOpen) document.getElementById('si').focus();
-  else{document.getElementById('sc').textContent='';editor.focus()}
+  const b=document.getElementById('sb'),i=document.getElementById('si');
+  b.classList.toggle('on',sOpen);
+  if(sOpen){ 
+    setTimeout(()=>{ i.focus(); i.select(); _find(); },10);
+  }
+  else{ editor.getAllMarks().filter(m=>m._searchMark).forEach(m=>m.clear()); document.getElementById('sc').textContent=''; editor.focus(); }
 }
 function sk(e){if(e.key==='Enter') fn();if(e.key==='Escape') toggleSearch()}
 function _find(back=false){
-  const q=document.getElementById('si').value;if(!q) return;
+  const q=document.getElementById('si').value; if(!q){ editor.getAllMarks().filter(m=>m._searchMark).forEach(m=>m.clear()); document.getElementById('sc').textContent=''; return; }
   editor.operation(()=>{
     editor.getAllMarks().filter(m=>m._searchMark).forEach(m=>m.clear());
     let n=0,c=editor.getSearchCursor(q,{line:0,ch:0},{caseFold:true});
-    while(c.findNext()){editor.markText(c.from(),c.to(),{className:'cm-searching',_searchMark:true});n++}
-    document.getElementById('sc').textContent=n?`~${n} kết quả`:'';
+    while(c.findNext()){ editor.markText(c.from(),c.to(),{className:'cm-searching',_searchMark:true}); n++; }
+    document.getElementById('sc').textContent=n?`${n} kết quả`:'0 kết quả';
   });
   const cur=editor.getSearchCursor(q,back?editor.getCursor('from'):editor.getCursor('to'),{caseFold:true});
   if(back?cur.findPrevious():cur.findNext()){
     editor.setSelection(cur.from(),cur.to());
-    editor.scrollIntoView({from:cur.from(),to:cur.to()},80);
-  } else simsAlert(`Không tìm thấy: "${q}"`,'warning');
+    editor.scrollIntoView({from:cur.from(),to:cur.to()},100);
+  }
 }
 function fn(){_find(false)}
 function fp(){_find(true)}
@@ -614,35 +665,45 @@ document.getElementById('fi').onchange=e=>{
           }).join('\n');
         } else throw 'Không tìm thấy cấu trúc TSD hoặc DEST';
       }
-      showLoader(()=>{
+      const loadDone=()=>{
         bsn=file.name;si2=0;
         document.getElementById('chip').textContent=mode;
         document.getElementById('fnm').textContent=bsn;
         document.getElementById('ws').style.display='none';
         document.getElementById('ew').classList.add('on');
         document.getElementById('fci').style.display='flex';
-        showEdOv('Đang nạp dữ liệu...');
-        setTimeout(()=>{
-          editor.setValue(content);
-          setTimeout(()=>{editor.refresh();hideEdOv()},80);
-        },50);
-      });
+        editor.setValue(content);
+        setTimeout(()=>{editor.refresh()},80);
+      };
+      if(document.getElementById('ws').style.display!=='none'){
+        showLoader(loadDone);
+      } else {
+        showEdProgress('Reticulating Splines...', loadDone);
+      }
     } catch(err){simsAlert('❌ '+err,'error')}
   };
   r.readAsText(file,'UTF-8');e.target.value='';
 };
 
-function showEdOv(txt){
-  document.getElementById('ed-ov-txt').textContent=txt;
-  document.getElementById('ed-ov').classList.add('show');
+function showEdProgress(txt,cb){
+  const ov=document.getElementById('ed-ov'),f=document.getElementById('ed-ldf'),t=document.getElementById('ed-ov-txt');
+  ov.classList.add('show');f.style.width='0%';t.textContent=txt;
+  let p=0;
+  const iv=setInterval(()=>{
+    p+=Math.random()*5+5;if(p>100)p=100;f.style.width=p+'%';
+    if(p<40) t.textContent='Reticulating Splines...';
+    else if(p<80) t.textContent='Đang dọn dẹp nhà cửa...';
+    else t.textContent='Hoàn tất! Sul Sul!';
+    if(p>=100){clearInterval(iv);setTimeout(()=>{ov.classList.remove('show');if(cb)cb()},350)}
+  },120);
 }
+function showEdOv(txt){document.getElementById('ed-ov-txt').textContent=txt;document.getElementById('ed-ov').classList.add('show')}
 function hideEdOv(){document.getElementById('ed-ov').classList.remove('show')}
 
 /* ── EXPORT ── */
 function expFile(){
   if(!xmlDoc&&!jsonDoc) return;
-  showEdOv('Đang xuất file...');
-  setTimeout(()=>{
+  showEdProgress('Exporting STBL Data...', ()=>{
     try{
       const lines=editor.getValue().split('\n');
       const fromEditorTSD=t=>t.replace(/↵/g,'\\n');
@@ -660,10 +721,10 @@ function expFile(){
         let out=new XMLSerializer().serializeToString(xmlDoc).replace(/ xmlns=""/g,'');
         if(mode==='DEST') out=out.replace(/(<(?:Dest|Source)>)([\/\s\S]*?)(<\/(?:Dest|Source)>)/g,(_,o,b,c)=>o+b.replace(/"/g,'&quot;')+c);
         if(!out.startsWith('<?xml')) out='<?xml version="1.0" encoding="utf-8"?>\n'+out;
-        dl(out,'text/xml');
+        setTimeout(()=>dl(out,'text/xml'),100);
       }
-    } finally{setTimeout(hideEdOv,400)}
-  },60);
+    } catch(e){simsAlert('❌ Lỗi xuất file!','error')}
+  });
 }
 function dl(data,type){
   let fn=bsn;if(si2>0){const p=bsn.split('.'),ex=p.pop();fn=`${p.join('.')}_v${si2}.${ex}`}si2++;
