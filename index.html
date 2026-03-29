@@ -14,7 +14,7 @@
 :root {
   --blue:#4a9eff; --green:#44d62c; --green-d:#2d921d; --red:#ff5569;
   --bg:#111827; --surf:#1f2937; --surf2:#374151; --bd:#374151;
-  --tx:#f3f4f6; --tx2:#9ca3af; --tx3:#6b7280; --lh:1.6;
+  --tx:#f3f4f6; --tx2:#9ca3af; --tx3:#6b7280; --lh:1.4;
 }
 [data-theme="light"] {
   --bg:#f0f4f8; --surf:#fff; --surf2:#e5e7eb; --bd:#d1d5db;
@@ -152,17 +152,22 @@ select:focus{outline:2px solid var(--blue);border-color:transparent}
 .cm-searching{background:rgba(255, 230, 0, 0.6) !important; outline:3px solid #ffcc00 !important; border-radius:3px; box-shadow: 0 0 20px rgba(255, 204, 0, 0.4); z-index: 10}
 [data-theme="light"] .cm-searching{background:rgba(255, 230, 0, 0.4) !important; outline:3px solid #eab308 !important}
 
-/* ── WELCOME (BACKUP STYLE) ── */
+/* ── DRAG & DROP OVERLAY ── */
+.drag-overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);flex-direction:column;justify-content:center;align-items:center;color:#fff;font-family:'Lexend',sans-serif;font-size:32px;font-weight:900;opacity:0;transition:opacity .2s;pointer-events:none}
+.drag-overlay.on{display:flex;opacity:1}
+.drag-icon{font-size:80px;margin-bottom:20px;animation:floatIcon 1s ease-in-out infinite alternate}
+
+/* ── WELCOME ── */
 #ws{position:fixed;inset:0;z-index:9000;display:flex;flex-direction:column;justify-content:center;align-items:center;overflow:hidden;color:#fff;background:radial-gradient(circle at center,#1e4f94 0%,#0b1421 100%)}
 [data-theme="light"] #ws{background:radial-gradient(circle at center,#ffffff 0%,#f5faff 100%)}
-[data-theme="light"] #ws .wc-title{color:#1d4ed8;text-shadow:3px 3px 0 rgba(29,78,216,0.05);animation:breatheLight 4s ease-in-out infinite}
-[data-theme="light"] #ws .wc-sub{color:#1e40af;font-weight:900}
+[data-theme="light"] #ws .wc-title{color:black;text-shadow:3px 3px 0 rgba(29,78,216,0.05);animation:breatheLight 4s ease-in-out infinite}
+[data-theme="light"] #ws .wc-sub{color:slategray;font-weight:555}
 [data-theme="light"] #ws .ld-txt, [data-theme="light"] #ws .ld-bar{border-color:rgba(29,78,216,0.12);color:#1e40af}
 [data-theme="light"] #ws .ld-bar{background:rgba(29,78,216,0.03)}
 [data-theme="light"] #ws .ld-fill{background:linear-gradient(90deg,#1d4ed8,#3b82f6,#1d4ed8)}
 [data-theme="light"] #ws .cbtn{background:rgba(255,255,255,0.8);border-color:rgba(29,78,216,0.12);color:#1d4ed8;box-shadow:0 2px 8px rgba(0,0,0,0.05)}
 [data-theme="light"] .wb-deco{opacity:0.35;color:#1d4ed8;filter:drop-shadow(0 0 5px rgba(29,78,216,0.1))}
-[data-theme="light"] #ws .wc-tip{color:#1e40af;font-weight:800;text-shadow:none}
+[data-theme="light"] #ws .wc-tip{color:seagreen;font-weight:550;text-shadow:none}
 @keyframes breatheLight{0%,100%{transform:scale(1);opacity:0.95}50%{transform:scale(1.02);opacity:1}}
 
 .wb-deco{position:absolute;font-size:42px;opacity:0.08;pointer-events:none;user-select:none;animation:floatIcon 6s ease-in-out infinite alternate}
@@ -180,9 +185,9 @@ select:focus{outline:2px solid var(--blue);border-color:transparent}
 .pb-gem::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.6) 0%,transparent 50%,rgba(0,0,0,.2) 100%);clip-path:inherit}
 
 /* Interactive SUL SUL */
-.wc-title{font-family:'Lexend',sans-serif;font-weight:900;font-size:82px;margin-bottom:12px;line-height:1;text-shadow:4px 4px 0 rgba(0,0,0,0.4);color:#fff;animation:breathe 4s ease-in-out infinite}
-.wc-sub{font-family:'Lexend',sans-serif;font-weight:600;font-size:16px;letter-spacing:8px;text-transform:uppercase;opacity:.7;margin-bottom:20px;color:#fff}
-.wc-tip{font-size:18px;opacity:.9;margin-bottom:40px;min-height:26px;color:#a8ff78;font-weight:600;font-style:italic;transition:opacity .4s;text-align:center;max-width:550px}
+.wc-title{font-family:'Lexend',sans-serif;font-weight:900;font-size:90px;margin-bottom:14px;line-height:1;text-shadow:4px 4px 0 rgba(0,0,0,0.4);color:#fff;animation:breathe 4s ease-in-out infinite}
+.wc-sub{font-family:'Lexend',sans-serif;font-weight:555;font-size:16px;letter-spacing:5px;text-transform:none;opacity:.7;margin-bottom:20px;color:#fff}
+.wc-tip{font-size:16px;opacity:.9;margin-bottom:40px;min-height:26px;color:#a8ff78;font-weight:550;font-style:italic;transition:opacity .4s;text-align:center;max-width:600px}
 
 /* Welcome loading bar */
 .ld-wrap{width:400px;display:flex;flex-direction:column;align-items:center;gap:15px;margin:0 auto 50px;position:relative}
@@ -231,13 +236,14 @@ code{background:var(--bg);border:1px solid var(--bd);border-radius:4px;padding:1
 
 <!-- ── HEADER ── -->
 <header class="hdr">
-  <button class="logo-btn" onclick="goHome()">
-    <span class="logo-badge">THE SIMS <span class="g">4</span></span>
+  <button class="logo-btn" onclick="goHome()" title="Quay lại Trang Chủ">
+    <span class="logo-badge" style="background:var(--blue);display:flex;align-items:center;gap:6px">
+      <span style="font-size:14px">🏠</span> HOMEPAGE
+    </span>
   </button>
-  <span class="logo-sub">Translation Tool</span>
-  <div class="file-info" id="fci">
-    <span class="type-chip" id="chip">---</span>
-    <span class="file-nm" id="fnm"></span>
+  <div class="file-info" id="fci" style="margin-left:12px;padding-left:12px;border-left:2px solid var(--bd)">
+    <span class="type-chip" id="chip" style="transform:translateY(-1px);box-shadow:0 2px 4px rgba(0,0,0,0.2)">---</span>
+    <span class="file-nm" id="fnm" style="font-family:'Lexend',sans-serif;font-weight:600;letter-spacing:0.5px"></span>
   </div>
   <div class="hdr-r">
     <button class="btn btn-ghost btn-sm" onclick="toggleSearch()">🔍 Tìm kiếm</button>
@@ -273,8 +279,8 @@ code{background:var(--bg);border:1px solid var(--bd);border-radius:4px;padding:1
         <input type="range" id="sr" min="12" max="26" value="14" oninput="setSize(this.value)">
       </div>
       <div>
-        <div class="row" style="margin-bottom:5px"><span class="lbl">Chiều cao dòng</span><span class="val" id="lhv">1.6</span></div>
-        <input type="range" id="lhr" min="1.2" max="2.6" step="0.1" value="1.6" oninput="setLH(this.value)">
+        <div class="row" style="margin-bottom:5px"><span class="lbl">Chiều cao dòng</span><span class="val" id="lhv">1.4</span></div>
+        <input type="range" id="lhr" min="1.2" max="2.6" step="0.1" value="1.4" oninput="setLH(this.value)">
       </div>
     </div>
     <p class="sec">Chi tiết dòng</p>
@@ -316,10 +322,9 @@ code{background:var(--bg);border:1px solid var(--bd);border-radius:4px;padding:1
   <div class="pb-cnt"><div class="pb-gem"></div></div>
 
   <div class="wc">
-    <p class="wc-sub">Phiên bản 1.0</p>
+    <p class="wc-sub">TS4 Translation Tool | V1.0</p>
     <h1 class="wc-title">SUL SUL!</h1>
     <p class="wc-tip" id="wtip">Chào mừng đến với TS4 Translation Tool!</p>
-
     <div class="ld-wrap" id="ld-wrap" style="display:none">
       <div class="ld-bar"><div class="ld-fill" id="ldf"></div></div>
       <p class="ld-txt" id="ldt">Đang tải...</p>
@@ -376,6 +381,12 @@ code{background:var(--bg);border:1px solid var(--bd);border-radius:4px;padding:1
 
 <input type="file" id="fi" accept=".xml,.json" style="display:none">
 
+<!-- ── DRAG & DROP OVERLAY ── -->
+<div class="drag-overlay" id="drag-ov">
+  <div class="drag-icon">📥</div>
+  <div>Thả tệp XML / JSON vào đây</div>
+</div>
+
 <script>
 /* ── STATE ── */
 let xmlDoc=null,jsonDoc=null,items=[],mode='',bsn='',si2=0,orig=[],ids=[];
@@ -404,7 +415,6 @@ function buildAbout(){
     <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:18px;gap:12px">
       <div><b style="font-size:22px;color:var(--blue)">SUL SUL! 👋</b><br></div>
     </div>
-    <p style="margin-bottom:12px">The Sims 4 Translation Tool</p> 
     🌐 <b>Liên Hệ:</b><br>
     • GitHub: <a href="https://github.com/JustaTama" target="_blank" style="color:var(--green);font-weight:800;text-decoration:none">@JustaTama</a><br>
     • LinkBio: <a href="https://guns.lol/mtama1204" target="_blank" style="color:var(--green);font-weight:800;text-decoration:none">guns.lol/mtama1204</a>
@@ -414,7 +424,7 @@ function buildAbout(){
     <div style="display:flex;flex-direction:column;gap:12px">
       <div><b style="color:var(--blue)">1. Trích xuất:</b> Dùng
     <a href="https://github.com/voky1/sims4-translator" target="_blank" style="color:var(--blue)">TS4 Translator</a> hoặc
-    <a href="https://deaderpool-mccc.com/dpstbleditor.html" target="_blank" style="color:var(--blue)">STBL Editor</a> để xuất file <code>.package</code> sang file <code>.xml</code> hoặc <code>.json</code>.</div>
+    <a href="https://deaderpool-mccc.com/dpstbleditor.html" target="_blank" style="color:var(--blue)">STBL Editor</a> để xuất file <code>.package</code> sang <code>.xml</code> hoặc <code>.json</code>.</div>
       <div><b style="color:var(--blue)">2. Nạp dữ liệu:</b> Ấn <code>🚀 BẮT ĐẦU</code> ở màn hình WELCOME để upload file vừa xuất vào Editor. Hệ thống sẽ <b>khóa dòng 1:1</b> để bảo vệ file.</div>
       <div><b style="color:var(--blue)">3. Dịch thuật:</b> Dịch từng dòng. Giữ nguyên các biến <code>{variable}</code> khi dịch</div>
       <div><b style="color:var(--blue)">4. Xuất bản:</b> Nhấn Export và đóng gói lại vào file <code>.package</code> bằng Tool ở bước 1</div>
@@ -438,14 +448,15 @@ function buildAbout(){
     </div>
   </div>
   <div class="pane">
-    <div style="border-left:6px solid var(--blue);padding-left:20px">
+    <div style="border-left:6px solid var(--blue);padding-left:20px;background:var(--surf2);padding:14px 20px;border-radius:0 12px 12px 0">
       <b style="font-size:18px;color:var(--blue)">V1.0 - Official Release</b><br>
-      <span style="font-size:12px;color:var(--tx3);letter-spacing:1px">LAST UPDATE: 28/3/2026</span><br><br>
-      ✅ Welcome screen: Plumbob 3D, SUL SUL! shimmer effect, loading bar.(Light/Dark).<br>
-      ✅ Hỗ trợ nhiều loại file: .XML (DEST/TSD) và .JSON<br>
-      ✅ Thanh tiến trình "Reticulating Splines" chuyên nghiệp.<br>
-      ✅ Hệ thống "Copy/Paste" lọc newline tự động.<br><br>
-      <span style="color:var(--green);font-weight:900;letter-spacing:2px">READY</span>
+      <span style="font-size:12px;color:var(--tx3);letter-spacing:1px;font-weight:800">LAST UPDATE: 29/3/2026</span><br><br>
+      ✅ <b>Trải nghiệm Siêu mượt:</b> Kéo & Thả (Drag & Drop) tệp siêu nhanh, cấu trúc Clean Code.<br>
+      ✅ <b>Tìm kiếm Cực chuẩn:</b> Highlight chính xác 1 từ đang chọn, wrap around liên tục khi ấn Enter.<br>
+      ✅ <b>Hỗ trợ đa dạng:</b> Đọc/ghi siêu tốc .XML (DEST/TSD) & .JSON với độ định vị dòng 100%.<br>
+      ✅ <b>Giao diện Hiện đại:</b> 3D Plumbob, hiệu ứng "SUL SUL" lấp lánh và Dark/Light mode.<br><br>
+      <span style="color:var(--green);font-weight:900;letter-spacing:2px;background:rgba(68,214,44,0.15);padding:4px 10px;border-radius:5px">READY</span>
+    </div>
   </div>`;
 }
 function showAbout(){
@@ -472,7 +483,7 @@ function toggleTheme(){
 /* ── HOME ── */
 function goHome(){
   if(!mode) return;
-  simsConfirm('Quay về trang chủ? Mọi thay đổi chưa lưu sẽ tan biến vào hư vô !?',ok=>{
+  simsConfirm('Quay về trang chủ? Mọi thay đổi sẽ tan biến vào hư vô !',ok=>{
     if(!ok) return;
     document.getElementById('ws').style.display='flex';
     document.getElementById('ew').classList.remove('on');
@@ -506,17 +517,16 @@ setInterval(()=>{
 /* ── LOADING BAR ── */
 function showLoader(cb){
   const wrap=document.getElementById('ld-wrap'),fill=document.getElementById('ldf'),txt=document.getElementById('ldt');
-  const msgs=['Đang đọc file...','Phân tích cấu trúc...','Nạp dữ liệu vào Editor...','Hoàn tất!'];
   wrap.style.display='flex';fill.style.width='0%';
   let p=0,mi=0;
   const iv=setInterval(()=>{
-    p+=Math.random()*5+5;
+    p+=Math.random()*5+4;
     if(p>100) p=100;
     fill.style.width=p+'%';
-    if(p<30) txt.textContent='Reticulating Splines...';
-    else if(p<60) txt.textContent='Phân tích DNA của Sim...';
-    else if(p<90) txt.textContent='Nạp dữ liệu vào vũ trụ Sims...';
-    else txt.textContent='Hoàn tất! Sul Sul!';
+    if(p<30) txt.textContent='Đang đọc file...';
+    else if(p<60) txt.textContent='Phân tích cấu trúc...';
+    else if(p<90) txt.textContent='Nạp dữ liệu vào Editor...';
+    else txt.textContent='Hoàn tất!';
     if(p>=100){clearInterval(iv);setTimeout(()=>{wrap.style.display='none';cb()},350)}
   },100);
 }
@@ -588,31 +598,70 @@ function setFont(f){editor.getWrapperElement().style.fontFamily=f;editor.refresh
 function setSize(v){editor.getWrapperElement().style.fontSize=v+'px';document.getElementById('sv').textContent=v+'px';editor.refresh()}
 function setLH(v){document.documentElement.style.setProperty('--lh',v);document.getElementById('lhv').textContent=v;editor.refresh()}
 
-/* ── SEARCH SYSTEM ── */
+/* ── SEARCH SYSTEM (CLEAN CODE) ── */
 let sOpen=false;
+const searchState = { query: null, matches: [], index: -1 };
+
 function toggleSearch(force){
   sOpen=force===true?true:!sOpen;
-  const b=document.getElementById('sb'),i=document.getElementById('si');
+  const b=document.getElementById('sb'), i=document.getElementById('si');
   b.classList.toggle('on',sOpen);
   if(sOpen){ 
     setTimeout(()=>{ i.focus(); i.select(); _find(); },10);
+  } else { 
+    clearSearch(); 
+    editor.focus(); 
   }
-  else{ editor.getAllMarks().filter(m=>m._searchMark).forEach(m=>m.clear()); document.getElementById('sc').textContent=''; editor.focus(); }
 }
-function sk(e){if(e.key==='Enter') fn();if(e.key==='Escape') toggleSearch()}
+
+function clearSearch(){
+  editor.getAllMarks().filter(m=>m._searchMark).forEach(m=>m.clear());
+  document.getElementById('sc').textContent='';
+  Object.assign(searchState, { query: null, matches: [], index: -1 });
+}
+
+function sk(e){
+  if(e.key==='Enter'){ e.preventDefault(); fn(); }
+  if(e.key==='Escape'){ e.preventDefault(); toggleSearch(); }
+}
+
 function _find(back=false){
-  const q=document.getElementById('si').value; if(!q){ editor.getAllMarks().filter(m=>m._searchMark).forEach(m=>m.clear()); document.getElementById('sc').textContent=''; return; }
+  const q=document.getElementById('si').value; 
+  if(!q){ clearSearch(); return; }
+
   editor.operation(()=>{
+    if(q !== searchState.query){
+      // New query mapping
+      searchState.query = q;
+      searchState.matches = [];
+      let c = editor.getSearchCursor(q, {line:0,ch:0}, {caseFold:true});
+      while(c.findNext()) searchState.matches.push({from: c.from(), to: c.to()});
+      searchState.index = searchState.matches.length ? 0 : -1;
+    } else {
+      // Loop existing matches
+      if(searchState.matches.length === 0) return;
+      if(back){
+        searchState.index--;
+        if(searchState.index < 0) searchState.index = searchState.matches.length - 1;
+      } else {
+        searchState.index++;
+        if(searchState.index >= searchState.matches.length) searchState.index = 0;
+      }
+    }
+
+    // Refresh display
     editor.getAllMarks().filter(m=>m._searchMark).forEach(m=>m.clear());
-    let n=0,c=editor.getSearchCursor(q,{line:0,ch:0},{caseFold:true});
-    while(c.findNext()){ editor.markText(c.from(),c.to(),{className:'cm-searching',_searchMark:true}); n++; }
-    document.getElementById('sc').textContent=n?`${n} kết quả`:'0 kết quả';
+    
+    if(searchState.index !== -1){
+      const m = searchState.matches[searchState.index];
+      editor.markText(m.from, m.to, {className:'cm-searching', _searchMark:true});
+      editor.setSelection(m.from, m.to);
+      editor.scrollIntoView({from: m.from, to: m.to}, 100);
+      document.getElementById('sc').textContent=`${searchState.index + 1} / ${searchState.matches.length}`;
+    } else {
+      document.getElementById('sc').textContent='0 kết quả';
+    }
   });
-  const cur=editor.getSearchCursor(q,back?editor.getCursor('from'):editor.getCursor('to'),{caseFold:true});
-  if(back?cur.findPrevious():cur.findNext()){
-    editor.setSelection(cur.from(),cur.to());
-    editor.scrollIntoView({from:cur.from(),to:cur.to()},100);
-  }
 }
 function fn(){_find(false)}
 function fp(){_find(true)}
@@ -630,9 +679,9 @@ document.addEventListener('keydown',e=>{
   if(e.key==='F3'){e.preventDefault();e.shiftKey?fp():fn()}
 },true);
 
-/* ── FILE LOAD ── */
-document.getElementById('fi').onchange=e=>{
-  const file=e.target.files[0];if(!file) return;
+/* ── FILE LOAD (CLEAN CODE & DRAG DROP) ── */
+function handleFile(file){
+  if(!file) return;
   const r=new FileReader();
   r.onload=ev=>{
     try{
@@ -682,18 +731,49 @@ document.getElementById('fi').onchange=e=>{
       }
     } catch(err){simsAlert('❌ '+err,'error')}
   };
-  r.readAsText(file,'UTF-8');e.target.value='';
+  r.readAsText(file,'UTF-8');
+}
+
+document.getElementById('fi').onchange=e=>{
+  handleFile(e.target.files[0]);
+  e.target.value='';
 };
+
+/* ── DRAG & DROP EVENTS ── */
+let dragTimer=null;
+document.addEventListener('dragover', e => {
+  e.preventDefault();
+  const ov = document.getElementById('drag-ov');
+  if(!ov.classList.contains('on')) ov.classList.add('on');
+  clearTimeout(dragTimer);
+});
+document.addEventListener('dragleave', e => {
+  e.preventDefault();
+  clearTimeout(dragTimer);
+  dragTimer = setTimeout(() => {
+    document.getElementById('drag-ov').classList.remove('on');
+  }, 100);
+});
+document.addEventListener('drop', e => {
+  e.preventDefault();
+  document.getElementById('drag-ov').classList.remove('on');
+  const file = e.dataTransfer.files[0];
+  if(file && (file.name.toLowerCase().endsWith('.xml') || file.name.toLowerCase().endsWith('.json'))){
+    handleFile(file);
+  } else {
+    simsAlert('Vui lòng kéo đúng định dạng .xml hoặc .json nhé!', 'warning');
+  }
+});
 
 function showEdProgress(txt,cb){
   const ov=document.getElementById('ed-ov'),f=document.getElementById('ed-ldf'),t=document.getElementById('ed-ov-txt');
   ov.classList.add('show');f.style.width='0%';t.textContent=txt;
   let p=0;
   const iv=setInterval(()=>{
-    p+=Math.random()*5+5;if(p>100)p=100;f.style.width=p+'%';
+    p+=Math.random()*5+6;if(p>100)p=100;f.style.width=p+'%';
     if(p<40) t.textContent='Reticulating Splines...';
-    else if(p<80) t.textContent='Đang dọn dẹp nhà cửa...';
-    else t.textContent='Hoàn tất! Sul Sul!';
+    else if(p<80) t.textContent='Đang dọn dẹp...';
+    else t.textContent='Hoàn tất!';
     if(p>=100){clearInterval(iv);setTimeout(()=>{ov.classList.remove('show');if(cb)cb()},350)}
   },120);
 }
