@@ -10,7 +10,7 @@
 
 ---
 
-[🇻🇳 Tiếng Việt](#-tiếng-việt) | [🇺🇸 English](#-english) | [🛠️ Technical](#-technical-details) | [🤝 Support](#-support--contact)
+[🇻🇳 Tiếng Việt](#-tiếng-việt) | [🇺🇸 English](#-english) | [🛠️ Technical](#%EF%B8%8F-technical-details) | [Contact](#contact)
 
 </div>
 
@@ -106,7 +106,7 @@
 
 ---
 
-## 🤝 Support & Contact
+## Contact
 - **Project Author:** [JustaTama](https://github.com/JustaTama)
 - **Personal:** [mtama1204](https://guns.lol/mtama1204)
 - **Repository:** [TS4-Translation-Tool](https://github.com/JustaTama/The-Sims-4-Translation-Tool)
@@ -115,5 +115,5 @@
 
 <div align="center">
   <p>Made with ❤️ for The Sims 4 Community</p>
-  <img src="https://static.wikia.nocookie.net/sims/images/5/54/Simspirations_Plumbob.gif/revision/latest/scale-to-width-down/1000?cb=20250213153708" width="50" alt="Plumbob">
+  <img src="https://static.wikia.nocookie.net/sims/images/5/54/Simspirations_Plumbob.gif/revision/latest/scale-to-width-down/1000?cb=20250213153708" width="55" alt="Plumbob">
 </div>
